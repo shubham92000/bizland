@@ -72,7 +72,7 @@
           </li>
         </ul>
         <!-- show case -->
-        <div class="showcase-container">
+        <div class="showcase container">
           <div class="row">
             <div class="col s12 main-text">
               <h5>You found the...</h5>
@@ -106,6 +106,28 @@
       $(document).ready(function () {
         // init side nav
         $('.button-collapse').sideNav();
+
+        // scrollfire
+        const options = [
+          {
+            selector: '.main-text',
+            offset: 0,
+            callback: function (el) {
+              Materialize.fadeInImage($(el));
+            },
+          },
+          {
+            selector: '.navbar-fixed',
+            offset: 1500,
+            callback: function () {
+              $('nav')
+                .removeClass('transparent')
+                .addClass('blue-grey darken-3');
+            },
+          },
+        ];
+
+        Materialize.scrollFire(options);
       });
     </script>
   </body>
