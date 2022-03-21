@@ -241,6 +241,50 @@
     </section>
 
     <!-- section : contact -->
+    <section class="section section-contact center scrollspy" id="contact">
+      <div id="googlemap"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col s12 m6 offset-m6">
+            <div class="card-panel z-depth-5">
+              <h4>Contact Us</h4>
+              <div class="input-field">
+                <input type="text" name="name" id="name" placeholder="Name" />
+                <label for="name">Name</label>
+              </div>
+              <div class="input-field">
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Email"
+                />
+                <label for="email">Email</label>
+              </div>
+              <div class="input-field">
+                <input
+                  type="text"
+                  name="phone"
+                  id="phone"
+                  placeholder="phone Number"
+                />
+                <label for="phone">Phone</label>
+              </div>
+              <div class="input-field">
+                <textarea
+                  class="materialize-textarea"
+                  name="message"
+                  id="message"
+                  placeholder="Message"
+                ></textarea>
+                <label for="message">Message</label>
+              </div>
+              <input type="submit" value="Submit" class="btn blue-grey" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- footer -->
     <footer class="page-footer blue-grey darken-1">
@@ -286,6 +330,7 @@
       src="https://code.jquery.com/jquery-3.2.1.min.js"
     ></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script src="https:maps.googleapis.com/maps/api/js"></script>
     <script>
       $(document).ready(function () {
         // init side nav
@@ -315,6 +360,42 @@
         ];
 
         Materialize.scrollFire(options);
+
+        const position = [42.361145, -71.057083];
+        const center = [42.377815, -70.91133];
+
+        function showGoogleMaps() {
+          // map positions
+          const latLng = new google.maps.LatLng(position[0], position[1]);
+          const centerLatLng = new google.maps.LatLng(center[0], center[1]);
+
+          // map options
+          const mapOptions = {
+            zoom: 12,
+            streetViewControl: false,
+            scaleControl: true,
+            mapTypeId: google.maps.mapTypeId,
+            ROADMAP,
+            center: centerLatLng,
+          };
+
+          // create map
+          map = new google.maps.Map(
+            document.getElementById('googlemap'),
+            mapOptions
+          );
+
+          // show marker
+          marker = new google.maps.Marker({
+            position: LatLng,
+            map: map,
+            draggable: false,
+            animation: google.maps.Animation.DROP,
+          });
+        }
+
+        // maps event
+        google.maps.event.addDomListener(window, 'load', showGoogleMaps);
       });
     </script>
   </body>
